@@ -77,6 +77,12 @@ class RatpackGrailsPlugin {
 
 	private void rebuildUrlMappings(RatpackApp ratpackApp, GrailsApplication application) {
 		ratpackApp.config.clear()
+
+		def conf = application.config.grails.plugin.ratpack
+		if (conf.templateRoot) {
+			ratpackApp.config.templateRoot = conf.templateRoot
+		}
+
 		ratpackApp.handlers.clear()
 		for (RatpackGrailsClass rgc in application.ratpackClasses) {
 			try {
