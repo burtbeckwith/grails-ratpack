@@ -13,7 +13,7 @@ import org.codehaus.groovy.grails.commons.GrailsApplication
  */
 class RatpackGrailsPlugin {
 
-	String version = '1.0'
+	String version = '1.0.1'
 	String grailsVersion = '1.3.3 > *'
 	String title = 'Ratpack'
 	String author = 'Burt Beckwith'
