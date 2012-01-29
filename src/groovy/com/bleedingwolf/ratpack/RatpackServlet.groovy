@@ -12,10 +12,15 @@ class RatpackServlet extends HttpServlet {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass())
 
+	protected int majorServletVersion
+
 	RatpackApp app
 	MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap()
 
 	void init() {
+
+		majorServletVersion = servletContext.majorVersion
+
 		if (app == null) {
 			String appScriptName = getServletConfig().getInitParameter("app-script-filename")
 			String fullScriptPath = getServletContext().getRealPath("WEB-INF/lib/${appScriptName}")
@@ -86,7 +91,12 @@ class RatpackServlet extends HttpServlet {
 		stream.flush()
 		stream.close()
 
-		logger.info("[   ${res.status}] ${verb} ${path}")
+		if (majorServletVersion > 2) {
+			logger.info("[   ${res.status}] ${verb} ${path}")
+		}
+		else {
+			logger.info("${verb} ${path}")
+		}
 	}
 
 	protected boolean staticFileExists(path) {
