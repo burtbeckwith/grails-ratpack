@@ -32,9 +32,8 @@ class RatpackGrailsPlugin {
 		'file:./plugins/*/grails-app/ratpack/**/*Ratpack.groovy']
 
 	String license = 'APACHE'
-	def organization = [name: 'SpringSource', url: 'http://www.springsource.org/']
 	def issueManagement = [system: 'JIRA', url: 'http://jira.grails.org/browse/GPRATPACK']
-	def scm = [url: 'https://github.com/grails-plugins/grails-ratpack']
+	def scm = [url: 'https://github.com/burtbeckwith/grails-ratpack']
 
 	private Logger log = Logger.getLogger('grails.plugin.ratpack.RatpackGrailsPlugin')
 
