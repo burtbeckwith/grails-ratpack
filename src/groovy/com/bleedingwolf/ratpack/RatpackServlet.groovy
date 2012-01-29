@@ -28,14 +28,17 @@ class RatpackServlet extends HttpServlet {
 			logger.info('Loading app from script "{}"', appScriptName)
 			loadAppFromScript(fullScriptPath)
 		}
-		mimetypesFileTypeMap.addMimeTypes(
-			Thread.currentThread().contextClassLoader.getResourceAsStream(
-				'com/bleedingwolf/ratpack/mime.types').text)
+		mimetypesFileTypeMap.addMimeTypes(contextClassLoader.getResourceAsStream(
+			'com/bleedingwolf/ratpack/mime.types').text)
 	}
 
 	protected void loadAppFromScript(String filename) {
 		app = new RatpackApp()
 		app.prepareScriptForExecutionOnApp(filename)
+	}
+
+	protected ClassLoader getContextClassLoader() {
+		Thread.currentThread().contextClassLoader
 	}
 
 	void service(HttpServletRequest req, HttpServletResponse res) {
@@ -109,15 +112,16 @@ class RatpackServlet extends HttpServlet {
 		url.openStream().bytes
 	}
 
-	protected URL staticFileFrom(path) {
+	protected URL staticFileFrom(String path) {
 		def publicDir = app.config.public
-		def fullPath = [publicDir, path].join(File.separator)
-		def file = new File(fullPath)
+		def file = new File(publicDir, path)
 
-		if (file.exists()) return file.toURI().toURL()
+		if (file.exists()) {
+			return file.toURI().toURL()
+		}
 
 		try {
-			return Thread.currentThread().contextClassLoader.getResource([publicDir, path].join('/'))
+			return contextClassLoader.getResource([publicDir, path].join('/'))
 		} catch(Exception e) {
 			return null
 		}
@@ -137,7 +141,7 @@ class RatpackServlet extends HttpServlet {
 
 		theApp.logger.info('Starting Ratpack app with config:\n{}', theApp.config)
 
-		def forName = { String className -> Class.forName(className, true, Thread.currentThread().contextClassLoader) }
+		def forName = { String className -> Class.forName(className, true, contextClassLoader) }
 		def Server = forName('org.mortbay.jetty.Server')
 		def Context = forName('org.mortbay.jetty.servlet.Context')
 		def ServletHolder = forName('org.mortbay.jetty.servlet.ServletHolder')
