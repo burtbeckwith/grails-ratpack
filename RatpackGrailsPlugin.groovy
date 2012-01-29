@@ -21,6 +21,11 @@ class RatpackGrailsPlugin {
 	String description = 'Ratpack Integration'
 	String documentation = 'http://grails.org/plugin/ratpack'
 
+	def pluginExcludes = [
+		'docs/**',
+		'src/docs/**'
+	]
+
 	def artefacts = [RatpackArtefactHandler]
 	def watchedResources = [
 		'file:./grails-app/ratpack/**/*Ratpack.groovy',
