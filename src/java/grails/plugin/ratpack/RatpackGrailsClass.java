@@ -1,5 +1,6 @@
 package grails.plugin.ratpack;
 
+import org.codehaus.groovy.grails.commons.GrailsApplication;
 import org.codehaus.groovy.grails.commons.InjectableGrailsClass;
 
 /**
@@ -8,5 +9,5 @@ import org.codehaus.groovy.grails.commons.InjectableGrailsClass;
  * @author <a href='mailto:burt@burtbeckwith.com'>Burt Beckwith</a>
  */
 public interface RatpackGrailsClass extends InjectableGrailsClass {
-	// no extra methods
+	void setGrailsApplication(GrailsApplication application);
 }

@@ -76,6 +76,7 @@ class RatpackGrailsPlugin {
 		ratpackApp.handlers.clear()
 		for (RatpackGrailsClass rgc in application.ratpackClasses) {
 			try {
+				rgc.grailsApplication = application
 				if (log.debugEnabled) {
 					log.debug "Processing $rgc"
 				}

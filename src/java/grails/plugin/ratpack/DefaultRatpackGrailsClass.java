@@ -4,6 +4,7 @@ import groovy.lang.GroovySystem;
 import groovy.lang.MetaClass;
 
 import org.codehaus.groovy.grails.commons.AbstractInjectableGrailsClass;
+import org.codehaus.groovy.grails.commons.GrailsApplication;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -14,6 +15,8 @@ import org.springframework.context.ConfigurableApplicationContext;
  */
 public class DefaultRatpackGrailsClass extends AbstractInjectableGrailsClass
        implements RatpackGrailsClass {
+
+	private GrailsApplication grailsApplication;
 
 	/**
 	 * Default constructor.
@@ -36,5 +39,9 @@ public class DefaultRatpackGrailsClass extends AbstractInjectableGrailsClass
 		ctx.getBeanFactory().autowireBeanProperties(instance,
 				AutowireCapableBeanFactory.AUTOWIRE_BY_NAME, false);
 		return instance;
+	}
+
+	public void setGrailsApplication(GrailsApplication application) {
+		grailsApplication = application;
 	}
 }
