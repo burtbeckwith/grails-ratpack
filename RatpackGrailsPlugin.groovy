@@ -2,7 +2,7 @@ import com.bleedingwolf.ratpack.RatpackApp
 
 import grails.plugin.ratpack.GrailsRatpackServlet
 import grails.plugin.ratpack.RatpackArtefactHandler
-import grails.plugin.ratpack.RatpackGrailsClass
+import grails.plugin.ratpack.RatpackArtefactHandler.RatpackGrailsClass
 import grails.util.GrailsUtil
 
 import org.apache.log4j.Logger
